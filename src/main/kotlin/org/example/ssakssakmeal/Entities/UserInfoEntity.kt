@@ -19,6 +19,6 @@ class UserInfoEntity(
     var school: String? = null
     @Column
     var grade: Int? = null
-    @Column(name = "class")
-    var affiliationClass: Int? = null
+    @Column(name = "class-vlaue")
+    var class_value: Int? = null
 }

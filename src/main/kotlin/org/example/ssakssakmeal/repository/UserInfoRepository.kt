@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserInfoRepository: JpaRepository<UserInfoEntity, String> {
-    fun save(entity: UserInfoEntity): UserInfoEntity
     fun findByEmail(email: String): UserInfoEntity?
     fun changeGrade(grade: Int)
-
-
+    fun changeClass(value: Int)
 }
