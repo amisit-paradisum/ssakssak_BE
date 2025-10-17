@@ -1,6 +1,7 @@
 package review
 
 import org.example.ssakssakmeal.Entities.Review
+import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
 import review.dto.ReviewCreateRequest
 import review.dto.ReviewResponse
@@ -59,6 +60,13 @@ open class ReviewService (
         val updateReview = review.copy(star = star, menu = menu)
 
         return reviewRepository.save(updateReview).toResponse()
+    }
+
+    fun deleteReview(id: String) {
+        if (!reviewRepository.existsById(id)) {
+            throw NoSuchElementException("리뷰를 찾을 수 업서요! ID: $id")
+        }
+        reviewRepository.deleteById(id)
     }
 
 
