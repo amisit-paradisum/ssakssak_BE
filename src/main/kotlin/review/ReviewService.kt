@@ -9,6 +9,7 @@ import review.dto.ReviewResponse
 import java.time.OffsetDateTime
 
 @Service
+@Transactional
 class ReviewService (
     private val reviewRepository: ReviewRepository,
 ) {
