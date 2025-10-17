@@ -2,12 +2,14 @@ package review
 
 import org.example.ssakssakmeal.Entities.Review
 import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import review.dto.ReviewCreateRequest
 import review.dto.ReviewResponse
 import java.time.OffsetDateTime
 
-open class ReviewService (
+@Service
+class ReviewService (
     private val reviewRepository: ReviewRepository,
 ) {
 
