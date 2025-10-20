@@ -18,19 +18,19 @@ class AuthController(val authService: AuthService) {
     fun signup(@RequestBody oauth: String): ResponseEntity<SignResponseDto> {
         val res = authService.signUp(oauth)
         if(res == null) return ResponseEntity(HttpStatus.BAD_REQUEST)//todo: http status 정하기
-        return ResponseEntity<SignResponseDto>.ok(res);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/login")
     fun login(@RequestHeader info: String): ResponseEntity<SignResponseDto> {
         val res = authService.signIn(info);
         if(res == null) return ResponseEntity(HttpStatus.BAD_REQUEST)
-        return ResponseEntity<SignResponseDto>.ok(res)
+        return ResponseEntity.ok(res)
     }
     @GetMapping("/signInWithRefresh")
     fun signInWithRefresh(@RequestHeader token: String): ResponseEntity<SignResponseDto> {
         val res = authService.signInWithRefresh(token);
         if(res == null) return ResponseEntity(HttpStatus.BAD_REQUEST)
-        return ResponseEntity<SignResponseDto>.ok(res)
+        return ResponseEntity.ok(res)
     }
 }
