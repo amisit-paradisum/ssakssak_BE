@@ -1,4 +1,4 @@
-package review.dto
+package org.example.ssakssakmeal.review.dto
 
 data class ReviewCreateRequest(
     val id: String,

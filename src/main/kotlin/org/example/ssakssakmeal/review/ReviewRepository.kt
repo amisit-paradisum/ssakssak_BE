@@ -1,4 +1,4 @@
-package review
+package org.example.ssakssakmeal.review
 
 import org.example.ssakssakmeal.Entities.Review
 import org.springframework.data.jpa.repository.JpaRepository
