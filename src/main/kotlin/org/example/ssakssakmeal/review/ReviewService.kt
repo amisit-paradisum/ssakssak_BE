@@ -1,11 +1,10 @@
-package review
+package org.example.ssakssakmeal.review
 
 import org.example.ssakssakmeal.Entities.Review
-import org.springframework.http.ResponseEntity
+import org.example.ssakssakmeal.review.dto.ReviewCreateRequest
+import org.example.ssakssakmeal.review.dto.ReviewResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import review.dto.ReviewCreateRequest
-import review.dto.ReviewResponse
 import java.time.OffsetDateTime
 
 @Service
@@ -73,7 +72,7 @@ class ReviewService (
     }
 
 
-    private fun Review.toResponse() = ReviewResponse (
+    private fun Review.toResponse() = ReviewResponse(
         id = id,
         star = star,
         school = school,
