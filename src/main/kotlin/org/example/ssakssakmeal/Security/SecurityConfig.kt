@@ -1,6 +1,8 @@
 package org.example.ssakssakmeal.Security
 
 import org.example.ssakssakmeal.auth.oauth2.CustomOAuth2UserService
+import org.example.ssakssakmeal.auth.oauth2.JwtAuthFilter
+import org.example.ssakssakmeal.auth.oauth2.JwtUtil
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -13,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 class SecurityConfig(
     private val customOAuth2UserService: CustomOAuth2UserService,
-    private val jwtProvider:JwtProvider
+    private val jwtProvider: JwtUtil
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -27,21 +29,8 @@ class SecurityConfig(
                 it.requestMatchers("/match-wait").permitAll()
                 it.requestMatchers("/dedicated/**").permitAll()
                 it.requestMatchers("/index.html").permitAll()
+                it.requestMatchers("/login").permitAll()
                     .anyRequest().authenticated()
-            }
-            .oauth2Login { oauth2 ->
-                oauth2
-                    .loginPage("/login") // 커스텀 로그인 페이지 (옵션)
-                    .defaultSuccessUrl("/", true) // 로그인 성공 후 리다이렉트
-                    .failureUrl("/login?error=true") // 로그인 실패 시
-                    .userInfoEndpoint { userInfo ->
-                        userInfo.userService(customOAuth2UserService) // 커스텀 서비스
-                    }
-            }
-            .oauth2ResourceServer { oauth2 ->
-                oauth2.jwt { jwt ->
-                    jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())
-                }
             }
             .addFilterBefore(JwtAuthFilter(jwtProvider), UsernamePasswordAuthenticationFilter::class.java)
             .build()

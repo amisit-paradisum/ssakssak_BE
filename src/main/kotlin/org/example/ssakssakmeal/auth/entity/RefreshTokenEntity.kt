@@ -13,5 +13,5 @@ class RefreshTokenEntity (
     val refreshToken: String = "",
 
     @Column(nullable = false, name = "expire_time")
-    val expiredAt: Date = Instant.now()
+    val expiredAt: Date = Date.from(Instant.now()),
 )
